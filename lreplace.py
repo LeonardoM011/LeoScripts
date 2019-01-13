@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 # Name: lreplace
-# Version: 1.0.0
+# Version: 1.1.0
 # Description: Replaces file name that begins with a number with a string.
 # Author: LeonardoM011
 # Date: 1/9/2019
@@ -11,7 +11,7 @@ import argparse
 
 program_description = \
     "Replaces file name that begin with number with some text."
-program_version = "%(prog)s 1.0.0"
+program_version = "%(prog)s 1.1.0"
 
 
 def replace_numbers(name, replace_with, incl_period):
@@ -45,12 +45,16 @@ def main():
 
     args = parser.parse_args()
 
-    for filename in os.listdir(args.path[0]):
+    path = args.path[0]
+    text = args.text[0]
+    include_period = args.include_period
+
+    for filename in os.listdir(path):
         if filename[0].isdigit():
             newname = replace_numbers(
-                    filename, args.text[0], args.include_period[0])
-            filename = args.path[0] + '/' + filename
-            newname = args.path[0] + '/' + newname
+                    filename, text, include_period)
+            filename = path + '/' + filename
+            newname = path + '/' + newname
             os.rename(filename, newname)
 
 
